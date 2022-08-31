@@ -1,0 +1,69 @@
+{
+  "name": "@knallbumm/vue-sorrybook",
+  "version": "0.0.0",
+  "description": "The definitions of the components",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/sorrybook.umd.js",
+  "module": "./dist/sorrybook.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/sorrybook.js",
+      "require": "./dist/sorrybook.umd.js"
+    },
+    "./style": {
+      "import": "./dist/style.css"
+    }
+  },
+  "scripts": {
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "lint": "npm run lint:files src --",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:files": "eslint --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --max-warnings 0",
+    "typecheck": "vue-tsc --noEmit -p .",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knallbumm/vue-sorrybook.git"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/knallbumm"
+  },
+  "bugs": {
+    "url": "https://github.com/knallbumm/vue-sorrybook/issues"
+  },
+  "homepage": "https://github.com/knallbumm/vue-sorrybook#readme",
+  "dependencies": {
+    "@vueuse/core": "^8.7.5",
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.14",
+    "@vitejs/plugin-vue": "^3.0.0",
+    "@vue/eslint-config-typescript": "^11.0.0",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-vue": "^9.4.0",
+    "husky": "^8.0.1",
+    "install": "^0.13.0",
+    "lint-staged": "^13.0.3",
+    "npm": "^8.18.0",
+    "prettier": "^2.7.1",
+    "sass": "^1.53.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.0",
+    "vue-tsc": "^0.38.5"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --cache --fix"
+  }
+}

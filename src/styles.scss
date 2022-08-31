@@ -1,0 +1,63 @@
+$light: #f7f7f7;
+$light-focused: #e7e7e7;
+$light-active: #0091ff3e;
+$light-active-focused: #0091ff5e;
+
+$focused: #0001;
+$layout-border: #ddd;
+$input-border: #ccc;
+
+@mixin button {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 95%;
+  border: 1px solid $input-border;
+  background-color: $light;
+
+  &:hover,
+  &:focus {
+    background-color: $light-focused;
+  }
+}
+
+@mixin clean-button {
+  border: none;
+  font: inherit;
+  background-color: transparent;
+
+  &:hover,
+  &:focus {
+    background-color: $focused;
+  }
+}
+
+@mixin block-button {
+  display: block;
+  width: 100%;
+  padding: 5px 15px;
+  margin: 0;
+  text-align: left;
+}
+
+@mixin input {
+  border: 1px solid $input-border;
+  padding: 3px 8px;
+  background-color: $light;
+  border-radius: 4px;
+  color: inherit;
+  font-family: inherit;
+}
+
+@mixin input-transparent {
+  @include input;
+  border: 1px solid transparent;
+  background-color: transparent;
+  transition: border-color 0.2s, background-color 0.2s;
+
+  &:hover,
+  &:focus {
+    border-color: $input-border;
+    background-color: $light;
+  }
+}
