@@ -1,0 +1,26 @@
+// shared eslint config
+{
+  "root": true,
+  "plugins": ["simple-import-sort", "import", "prettier"],
+  "extends": [
+    "plugin:vue/vue3-recommended",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "@vue/eslint-config-typescript/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": ["warn"],
+    "no-console": [
+      "warn",
+      {
+        "allow": ["info", "error"]
+      }
+    ],
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "vue/multi-word-component-names": 0
+  }
+}
