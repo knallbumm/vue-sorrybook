@@ -1,6 +1,6 @@
 {
-  "name": "@knallbumm/vue-sorrybook",
-  "version": "0.0.0",
+  "name": "vue-sorrybook",
+  "version": "0.0.0-alpha.0",
   "description": "The definitions of the components",
   "type": "module",
   "files": [
