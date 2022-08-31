@@ -1,0 +1,38 @@
+name: 'Prepare node'
+description: 'Prepares node by installing node + dependencies'
+
+inputs:
+  npm_token:
+    description: 'may be needed to checkout submodules'
+    required: true
+  checkout_modules:
+    description: 'wether to checkout all submodules'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: checkout repository
+      uses: actions/checkout@v3
+
+    - name: Checkout submodules using a PAT
+      if: ${{ inputs.checkout_modules }}
+      shell: bash
+      run: |
+        git config --file .gitmodules --get-regexp url | while read url; do
+          git config --file=.gitmodules $(echo "$url" | sed -E "s/git@github.com:|https:\/\/github.com\//https:\/\/${{ inputs.NPM_TOKEN }}:${{ inputs.NPM_TOKEN }}@github.com\//")
+        done
+        git submodule sync
+        git submodule update --init --recursive
+
+    - name: setup node.js 16
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        registry-url: https://npm.pkg.github.com
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
+
+    - name: install node packages
+      run: npm ci
+      shell: bash

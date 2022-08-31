@@ -1,0 +1,57 @@
+on:
+  workflow_call:
+    secrets:
+      NPM_TOKEN:
+        required: false
+    input:
+      checkout_modules:
+        required: false
+
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+
+      - name: prepare node
+        uses: ./.github/actions/prepare-node
+        with:
+          npm_token: ${{ secrets.NPM_TOKEN }}
+          checkout_modules: ${{ inputs.checkout_modules }}
+
+      - name: run build
+        run: npm run build
+
+  lint-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+
+      - name: prepare node
+        uses: ./.github/actions/prepare-node
+        with:
+          npm_token: ${{ secrets.NPM_TOKEN }}
+          checkout_modules: ${{ inputs.checkout_modules }}
+
+      - name: run linting
+        run: npm run lint
+
+  type-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+
+      - name: prepare node
+        uses: ./.github/actions/prepare-node
+        with:
+          npm_token: ${{ secrets.NPM_TOKEN }}
+          checkout_modules: ${{ inputs.checkout_modules }}
+
+      - name: run typecheck
+        run: npm run typecheck
