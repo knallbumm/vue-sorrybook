@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onKeyPressed, useLocalStorage } from '@vueuse/core'
-import { computed, type Component } from 'vue'
+import { type Component, computed } from 'vue'
 
 import Resizer from './Resizer.vue'
 import Tabs, { type ITabs } from './Tabs.vue'

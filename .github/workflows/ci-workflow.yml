@@ -3,8 +3,9 @@ on:
     secrets:
       NPM_TOKEN:
         required: false
-    input:
+    inputs:
       checkout_modules:
+        type: boolean
         required: false
 
 jobs:
