@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { onKeyPressed, useLocalStorage } from '@vueuse/core'
-import { type Component, computed } from 'vue'
+import { AsyncComponentLoader, computed, defineAsyncComponent } from 'vue'
 
 import Resizer from './Resizer.vue'
 import Tabs, { type ITabs } from './Tabs.vue'
 
 const props = defineProps<{
   modelValue: string
-  stories: Section
+  sorries: Section
 }>()
 const emit = defineEmits(['update:modelValue'])
 
@@ -20,23 +20,17 @@ const path = computed({
   },
 })
 
-const tabs = computed(() => sectionToTabs(props.stories))
+const tabs = computed(() => sectionToTabs(props.sorries))
+
 const selectedTab = computed(() => {
-  let value: Section | Component = props.stories
-  for (const sel of path.value) {
-    value = (value as Section)[sel]
-  }
-  return value
+  if (!path.value[0]) return
+  return defineAsyncComponent(props.sorries[path.value[0]])
 })
 
 function sectionToTabs(section: Section) {
   const result: ITabs = {}
   for (const key in section) {
-    if ('render' in section[key]) {
-      result[key] = true
-    } else {
-      result[key] = sectionToTabs(section[key] as Section)
-    }
+    result[key] = true
   }
   return result
 }
@@ -57,7 +51,7 @@ onKeyPressed('f', (e: KeyboardEvent) => {
 
 <script lang="ts">
 interface Section {
-  [name: string]: Section | Component
+  [name: string]: AsyncComponentLoader
 }
 </script>
 
@@ -72,11 +66,11 @@ interface Section {
     </div>
     <Resizer v-model="resizeValue" type="col" />
     <div
-      v-if="path[1] != null"
+      v-if="selectedTab"
       class="right"
       :style="{ width: `${100 - resizeValue * 100}%` }"
     >
-      <component :is="selectedTab" :maximized="isMaximized"></component>
+      <component :is="selectedTab" :maximized="isMaximized" />
     </div>
   </div>
 </template>
@@ -115,6 +109,7 @@ interface Section {
 <style>
 html,
 body {
+  font-family: IBMPlexSans-Text;
   margin: 0;
 }
 </style>

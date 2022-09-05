@@ -3,23 +3,29 @@
   "version": "0.0.0-alpha.0",
   "description": "The definitions of the components",
   "type": "module",
+  "bin": {
+    "sorrybook": "bin/sorrybook.js"
+  },
   "files": [
-    "dist"
+    "dist",
+    "bin",
+    "sorrybook",
+    "assets"
   ],
-  "main": "./dist/sorrybook.umd.js",
+  "main": "./dist/sorrybook.umd.cjs",
   "module": "./dist/sorrybook.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/sorrybook.js",
-      "require": "./dist/sorrybook.umd.js"
+      "require": "./dist/sorrybook.umd.cjs"
     },
     "./style": {
       "import": "./dist/style.css"
     }
   },
   "scripts": {
-    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "build": "rimraf dist && vite build && vue-tsc --emitDeclarationOnly",
     "lint": "npm run lint:files src --",
     "lint:fix": "npm run lint -- --fix",
     "lint:files": "eslint --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --max-warnings 0",
@@ -40,10 +46,18 @@
   },
   "homepage": "https://github.com/knallbumm/vue-sorrybook#readme",
   "dependencies": {
+    "@rollup/plugin-typescript": "^8.4.0",
     "@vueuse/core": "^8.7.5",
+    "cac": "^6.7.14",
+    "events": "^3.3.0",
+    "glob": "^8.0.3",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.79.0",
     "vue": "^3.2.25"
   },
   "devDependencies": {
+    "@types/events": "^3.0.0",
+    "@types/glob": "^8.0.0",
     "@types/node": "^18.7.14",
     "@vitejs/plugin-vue": "^3.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
