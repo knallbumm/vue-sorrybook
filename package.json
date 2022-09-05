@@ -37,10 +37,6 @@
     "url": "git+https://github.com/knallbumm/vue-sorrybook.git"
   },
   "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com/knallbumm"
-  },
   "bugs": {
     "url": "https://github.com/knallbumm/vue-sorrybook/issues"
   },
