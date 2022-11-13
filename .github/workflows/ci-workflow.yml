@@ -7,6 +7,9 @@ on:
       checkout_modules:
         type: boolean
         required: false
+      test_check:
+        type: boolean
+        required: false
 
 jobs:
   build-check:
@@ -14,7 +17,7 @@ jobs:
 
     steps:
       - name: checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: prepare node
         uses: ./.github/actions/prepare-node
@@ -30,7 +33,7 @@ jobs:
 
     steps:
       - name: checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: prepare node
         uses: ./.github/actions/prepare-node
@@ -46,7 +49,7 @@ jobs:
 
     steps:
       - name: checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: prepare node
         uses: ./.github/actions/prepare-node
@@ -56,3 +59,19 @@ jobs:
 
       - name: run typecheck
         run: npm run typecheck
+
+  test-check:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.test_check == true }}
+    timeout-minutes: 10
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+
+      - name: prepare node
+        uses: ./.github/actions/prepare-node
+        with:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: run tests
+        run: npm run test
