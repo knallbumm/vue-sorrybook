@@ -23,7 +23,7 @@ const path = computed({
 const tabs = computed(() => sectionToTabs(props.sorries))
 
 const selectedTab = computed(() => {
-  if (!path.value[0]) return
+  if (!path.value[0] || !Object.keys(props.sorries).length) return
   return defineAsyncComponent(props.sorries[path.value[0]])
 })
 
