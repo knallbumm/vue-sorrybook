@@ -7,11 +7,6 @@ $focused: #0001;
 $layout-border: #ddd;
 $input-border: #ccc;
 
-@font-face {
-  font-family: 'IBMPlexSans-Text';
-  src: url('../assets/IBMPlexSans-Text.woff2') format('woff2');
-}
-
 @mixin button {
   padding: 3px 8px;
   border-radius: 4px;

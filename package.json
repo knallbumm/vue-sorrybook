@@ -3,29 +3,37 @@
   "version": "0.0.0-alpha.0",
   "description": "The definitions of the components",
   "type": "module",
-  "bin": {
-    "sorrybook": "bin/sorrybook.js"
-  },
   "files": [
-    "dist",
-    "bin",
-    "sorrybook",
-    "assets"
+    "dist"
   ],
-  "main": "./dist/sorrybook.umd.cjs",
-  "module": "./dist/sorrybook.js",
-  "types": "./dist/types/index.d.ts",
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/types/vue-sorrybook/src/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/sorrybook.js",
-      "require": "./dist/sorrybook.umd.cjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
     },
     "./style": {
       "import": "./dist/style.css"
+    },
+    "./plugin": {
+      "import": "./dist/plugin/index.js",
+      "require": "./dist/plugin/index.umd.cjs",
+      "types": "./dist/types/vue-sorrybook-plugin/src/index.d.ts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "plugin": [
+        "dist/types/vue-sorrybook-plugin/src/index.d.ts"
+      ]
     }
   },
   "scripts": {
-    "build": "rimraf dist && vite build && vue-tsc --emitDeclarationOnly",
+    "build": "npm run build-sorrybook && npm run build-sorrybook-plugin && vue-tsc --emitDeclarationOnly",
+    "build-sorrybook": "vite build --config packages/vue-sorrybook/vite.config.ts",
+    "build-sorrybook-plugin": "vite build --config packages/vue-sorrybook-plugin/vite.config.ts",
     "lint": "npm run lint:files src --",
     "lint:fix": "npm run lint -- --fix",
     "lint:files": "eslint --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --max-warnings 0",

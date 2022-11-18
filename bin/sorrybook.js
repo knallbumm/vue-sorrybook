@@ -6,30 +6,30 @@ import glob from 'glob'
 import { fileURLToPath } from 'url'
 import { createServer } from 'vite'
 
-const vueSorrybookPlugin = () => ({
-  name: 'vue-sorrybook-plugin',
-  apply: 'serve',
-  handleHotUpdate(ctx) {
-    const cwd = process.cwd()
-    glob('src/**/*.sorry.vue', (er, files) => {
-      ctx.server.ws.send(
-        'sorrybook:sorries',
-        files.map((file) => `${cwd}/${file}`)
-      )
-    })
-  },
-  configureServer(server) {
-    const cwd = process.cwd()
-    server.ws.on('sorrybook:get-sorries', (_, client) => {
-      glob('src/**/*.sorry.vue', (er, files) => {
-        client.send(
-          'sorrybook:sorries',
-          files.map((file) => `${cwd}/${file}`)
-        )
-      })
-    })
-  },
-})
+// const vueSorrybookPlugin = () => ({
+//   name: 'vue-sorrybook-plugin',
+//   apply: 'serve',
+//   handleHotUpdate(ctx) {
+//     const cwd = process.cwd()
+//     glob('src/**/*.sorry.vue', (er, files) => {
+//       ctx.server.ws.send(
+//         'sorrybook:sorries',
+//         files.map((file) => `${cwd}/${file}`)
+//       )
+//     })
+//   },
+//   configureServer(server) {
+//     const cwd = process.cwd()
+//     server.ws.on('sorrybook:get-sorries', (_, client) => {
+//       glob('src/**/*.sorry.vue', (er, files) => {
+//         client.send(
+//           'sorrybook:sorries',
+//           files.map((file) => `${cwd}/${file}`)
+//         )
+//       })
+//     })
+//   },
+// })
 
 const cli = cac('sorrybook')
 
@@ -44,15 +44,7 @@ cli
 
     const server = await createServer({
       root: __dirname,
-      plugins: [vue(), vueSorrybookPlugin()],
-      watch: {
-        cwd: 'src',
-      },
-      server: {
-        fs: {
-          allow: ['../..'],
-        },
-      },
+      plugins: [vue()],
     })
     await server.listen()
 

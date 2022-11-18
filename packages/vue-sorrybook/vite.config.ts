@@ -9,11 +9,10 @@ export default defineConfig({
     dedupe: ['vue'],
   },
   build: {
-    assetsDir: resolve(__dirname, 'src/assets'),
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'vue-sorrybook',
-      fileName: 'sorrybook',
+      fileName: 'index',
     },
     rollupOptions: {
       external: ['vue'],

@@ -18,11 +18,6 @@
     "outDir": "dist",
     "declarationDir": "dist/types"
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/components/**/*.vue"
-  ],
-  "exclude": ["node_modules", "dist", "test", "sorrybook"]
+  "include": ["packages/**/*.ts", "packages/**/*.d.ts", "packages/**/*.vue"],
+  "exclude": ["node_modules", "dist"]
 }
